@@ -2,3 +2,7 @@ Select * --wybór wszystkiego
 from person.person --wskazanie tabeli
 where -- warunek filtrujący
 order by --warunek sortujący
+
+
+
+GETDATE() --pobranie aktualnej daty
