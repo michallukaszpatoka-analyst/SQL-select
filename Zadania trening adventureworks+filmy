@@ -1,0 +1,80 @@
+select SalesOrderID, OrderDate, CustomerID, SubTotal 
+from sales.SalesOrderHeader
+order by OrderDate
+
+-- zad 2
+select SalesOrderID, RevisionNumber, OrderDate, DueDate, ShipDate, Status, OnlineOrderFlag
+from sales.SalesOrderHeader
+where OrderDate between '2014-05-01 00:00:00.000' and '2014-05-30 23:59:59.000'
+order by OrderDate
+
+-- zad 3
+
+select SalesOrderID, RevisionNumber, OrderDate,DueDate, ShipDate, Status, OnlineOrderFlag
+from sales.SalesOrderHeader
+where OrderDate > '2014-06-01 00:00:00.000' and CustomerID in ('11091', '11277')
+order by OrderDate
+
+--zad 4
+select ProductSubcategoryID, ProductCategoryID, Name, rowguid,ModifiedDate
+from production.productsubcategory
+where ProductCategoryID = '2' and (name like 'B%'or name like 'C%')
+
+--zadanie 5
+
+select BusinessEntityID, PersonType, NameStyle, Title, FirstName, MiddleName, LastName, Suffix, EmailPromotion, AdditionalContactInfo
+from person.Person
+where BusinessEntityID > '1000' and MiddleName is null
+order by lastname, FirstName
+
+--zad6
+select top 10 SalesOrderID, RevisionNumber, OrderDate, DueDate, ShipDate, Status, OnlineOrderFlag
+from sales.SalesOrderHeader
+where OrderDate between '2012-01-01 00:00:00.000' and '2012-12-31 00:00:00.000'
+order by TotalDue desc
+
+--zad 7
+select BusinessEntityID, PersonType, NameStyle, Title, FirstName, MiddleName, LastName, Suffix, EmailPromotion, AdditionalContactInfo,Demographics 
+from person.Person
+where FirstName = 'Ken' and LastName like 'M%'
+order by businessentityID
+
+--zad8
+select FilmID, Tytul,TytulOryginalny, JezykOryginalny, CzasTrwaniaMin,Opis
+from Film
+where JezykOryginalny = 'pl' and premiera > '2010-01-01' and CzasTrwaniaMin > 120
+order by TytulOryginalny
+
+select premiera
+from Film
+
+--zad 9
+select FilmID, Tytul,TytulOryginalny as org, JezykOryginalny, CzasTrwaniaMin, Opis
+from Film
+where JezykOryginalny in ('pl', 'de', 'fr') and (TytulOryginalny like 'C%' or TytulOryginalny like 'M%')
+
+--zad 10
+select CzasTrwaniaMin *60 as 'sekundy', FilmID, Tytul, TytulOryginalny, JezykOryginalny, CzasTrwaniaMin
+from Film
+where Tytul like 'Star Wars%'
+order by Premiera
+
+--ad1 
+select SalesOrderID, OrderDate, CustomerID, TotalDue
+from sales.SalesOrderHeader
+where OrderDate between '2014-01-01' and '2014-12-31'and customerID in (11000, 11001, 11002, 11003) and totaldue > 1000
+order by totaldue
+
+
+--ad2
+select ProductID, Name, Color, ListPrice
+from Production.Product
+where Color is not null and (name like 'B%' or name like 'R%') and listprice > 500
+
+--ad3
+select BusinessEntityID, FirstName, MiddleName,LastName
+from Person.Person
+where MiddleName is not null
+and (LastName like 'A%' or LastName like 'B%' or LastName like 'C%')
+and BusinessEntityID between 1000 and 1500
+order by LastName asc
